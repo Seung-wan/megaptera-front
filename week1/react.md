@@ -9,7 +9,8 @@
 ## React
 
 <aside>
-🚀 [**React 공식문서**](https://ko.reactjs.org/)
+
+[**React 공식문서**](https://ko.reactjs.org/)
 
 → 옛날 거라서 보면 안 될 줄 알았는데, 최근에 업데이트가 됨.
 
