@@ -40,10 +40,9 @@ LTS (Long Term Support)
 - mkdir my-all
 - cd my-app
 
-편집기 열기
+편집기(VSCode) 열기
 
 - code .
-- webstorm .
 
 npm 패키지 준비
 
