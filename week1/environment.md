@@ -74,7 +74,7 @@ ESLint 설정
 - npm i -D eslint
 - npx eslint --init
 - env에 jest:true를 미리 잡아줄 것.
-- .eslintignore 작ㅎ
+- .eslintignore 작성
 
 리액트 설치
 
