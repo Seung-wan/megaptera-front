@@ -22,7 +22,31 @@
 </aside>
 
 - React로 작업하는 프로세스는 [Thinking in React](https://beta.reactjs.org/learn/thinking-in-react)를 참고. “상태”를 골라내는 게 핵심이다.  
-  React는 직접 DOM을 찾아서 속성을 추가하고 element를 추가하는 명령형 프로그래밍이 아닌 선언적 프로그래밍을 할 수 있게 해준다. 화면에 UI를 어떻게 보여주고 싶은지 React에게 전달하면 된다.
+  React는 직접 DOM을 찾아서 속성을 추가하고 element를 추가하는 명령형 프로그래밍이 아닌 선언적 프로그래밍을 할 수 있게 해준다. 화면에 UI를 어떻게 보여주고 싶은지 React에게 전달하면 된다.  
+  React로 UI(User Interface)를 개발할 때 먼저 Component(컴포넌트)라고 불리는 조각들로 쪼개야 합니다. 그 후에 각각의 컴포넌트마다 적합한 state를 작성합니다. 마지막으로 컴포넌트들을 함께 연결하여 컴포넌트를 통해 데이터가 흐르게 합니다. 아래에서는 React를 이용하여 제품 검색을 할 수 있는 데이터 테이블을 만드는 과정에 대해 생각해볼것  
+  먼저 데이터(JSON)와 디자인 목업을 전달받았다고 가정한다.  
+  React에서 UI를 구현하기 위해서는 일반적으로 5가지 스텝을 밟게 된다.
+
+### Step 1: UI를 컴포넌트 단위로 쪼갠다.
+
+목업의 컴포넌트와 서브 컴포넌트에 네모 박스를 그리고 각각 이름을 붙이는 것으로 시작한다. 만약 디자이너와 함께 협업한다면, 이미 디자인 툴에서 컴포넌트에 붙여놓은 이름이 있을 수도 있다.  
+배경 지식에 따라 디자인을 컴포넌트로 분리하는 다양한 방식을 생각해볼 수 있다.
+
+- Programming: 함수 혹은 객체를 생성해야 하는지 결정하는 방식과 똑같다. 단일책임원칙(SRP)이며 즉 컴포넌트는 이상적으로 한 가지의 일만 해야 한다. 만약 컴포넌트가 커지면, 작은 서브 컴포넌트들로 분리되어야 한다.
+- CSS: 무엇을 class selector로 만들지 고려한다.
+- Design: 디자인 레이어를 어떻게 구성할지 고려한다.
+
+만약 JSON이 잘 구조화되어 있다면, UI와 컴포넌트 구조를 자연스랩게 매핑할 수 있다. 왜냐하면, UI와 data model은 종종 같은 아키텍처, 같은 모양을 가진다. 각각의 컴포넌트가 data model의 한 조각과 매치되도록 UI를 컴포넌트로 분리한다.
+![github pr](./images/react-step1.png)
+ProductTable의 Name과 Price가 컴포넌트가 아닌 것은 취향의 차이다. 컴포넌트로 만들어도 괜찮다. 지금은 괜찮지만 정렬 기능이 추가되는 등 헤더가 복잡해지면, 그때는 ProductTableHeader 컴포넌트를 작성하는 게 합당할 것이다.  
+현재 목업으로부터 컴포턴트를 식별했고 분리하면서 정리했다. 목업에서 다른 컴포넌트 내부에 등장하는 컴포넌트는 계층적으로 자식으로 등장해야 한다.
+
+- FilterableProductTable
+
+  - SearchBar
+  - ProductTable
+    - ProductCategoryRow
+    - ProductRow
 
 - 한국어로 읽고 싶다면 [예전 문서의 설명](https://ko.reactjs.org/docs/thinking-in-react.html)만 살짝 참고하자(코드는 참고하지 말 것!).
 - [React 코어 개발자가 쓴 React에 대한 이해를 돕는 글](https://overreacted.io/ko/react-as-a-ui-runtime/) (필독!)
