@@ -14,16 +14,23 @@
 
 → 옛날 거라서 보면 안 될 줄 알았는데, 최근에 업데이트가 됨.
 
+- 기존에는 클래스 컴포넌트 예제가 많았지만, 많은 부분이 함수 컴포넌트로 변경되어 읽기에 괜찮다.
+
 [**React Beta 문서**](https://beta.reactjs.org/)
 → 요즘 React 사용법을 다룬 문서. 베타 버전이고 완성도가 낮지만 (+ 한국어 버전이 없지만) 이것부터 읽는 걸 권장.
 
 </aside>
 
 - React로 작업하는 프로세스는 [Thinking in React](https://beta.reactjs.org/learn/thinking-in-react)를 참고. “상태”를 골라내는 게 핵심이다.
+  - 상태(state)란, UI를 표현하기 위해 사용되며 변할 수 있는 값.
 - 한국어로 읽고 싶다면 [예전 문서의 설명](https://ko.reactjs.org/docs/thinking-in-react.html)만 살짝 참고하자(코드는 참고하지 말 것!).
 - [React 코어 개발자가 쓴 React에 대한 이해를 돕는 글](https://overreacted.io/ko/react-as-a-ui-runtime/) (필독!)
+  - Dan Abramov는 신이야...
 
 ### 렌더링
+
+- 브라우저에 view를 보여주는 것
+- 함수가 실행되는 것
 
 - createRoot (React 18)
 
@@ -49,6 +56,8 @@ main();
 
 - 여러 개의 Root를 만들 수 있고, 여러 번 render할 수 있다.
 - React는 변경된 부분만 업데이트 한다.
+  - Reconciliation(재조정)
+  - diffing algorithm
 
 ### 리렌더링
 
@@ -72,3 +81,7 @@ State가 바뀔 때 리렌더링이 되고, 자녀들도 리렌더링이 된다.
 [제어의 역전](https://martinfowler.com/bliki/InversionOfControl.html)(IoC: Inversion of Control)이 Framework의 주요한 특징이고, React는 IoC를 통해 상태와 업데이트가 얽힌 복잡한 상황을 간단히 선언형 UI로 구성하는 혜택을 누린다(이게 바로 React의 첫 번째 특징이다). 그 누구도 매번 root를 render하는 방식으로 쓰면서 “이게 라이브러리지!”라며 감탄하지 않는다.
 
 하지만 일반적으로는 (Martin Fowler의 개탄처럼) IoC는 IoC 컨테이너와 엮여서 DI와 동의어처럼 쓰이고, Next.js, Remix 같은 걸 Framework이라고 부르니 면접 때 괜히 이런 걸로 싸우지는 말자. “리액트 개발자가 이렇게 이야기했다니까요!”라고 해봐야 서로 감정만 상할 뿐이다.
+
+우리는 스스로 몰랐더라도 라이브러리, 프레임워크를 사용하면서 제어의 역전을 경험하고 있다.  
+스스로 관리하지 않더라도 구현체에 값을 전달해주면, 구현체가 대신해서 특정 역할을 해주는 것.  
+React의 선언적인 렌더링도 제어의 역전이다.
