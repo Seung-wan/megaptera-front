@@ -21,8 +21,9 @@
 
 </aside>
 
-- React로 작업하는 프로세스는 [Thinking in React](https://beta.reactjs.org/learn/thinking-in-react)를 참고. “상태”를 골라내는 게 핵심이다.
-  - 상태(state)란, UI를 표현하기 위해 사용되며 변할 수 있는 값.
+- React로 작업하는 프로세스는 [Thinking in React](https://beta.reactjs.org/learn/thinking-in-react)를 참고. “상태”를 골라내는 게 핵심이다.  
+  React는 직접 DOM을 찾아서 속성을 추가하고 element를 추가하는 명령형 프로그래밍이 아닌 선언적 프로그래밍을 할 수 있게 해준다. 화면에 UI를 어떻게 보여주고 싶은지 React에게 전달하면 된다.
+
 - 한국어로 읽고 싶다면 [예전 문서의 설명](https://ko.reactjs.org/docs/thinking-in-react.html)만 살짝 참고하자(코드는 참고하지 말 것!).
 - [React 코어 개발자가 쓴 React에 대한 이해를 돕는 글](https://overreacted.io/ko/react-as-a-ui-runtime/) (필독!)
   - Dan Abramov는 신이야...
