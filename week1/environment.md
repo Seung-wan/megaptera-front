@@ -103,3 +103,26 @@ Parcel 설치
 
 - npm i -D parcel
 - package.json scripts 수정
+
+---
+
+## 만들어진 개발 환경 (React)
+
+- CRA (Create-React-App)
+  - npx create-react-app my-app --template typescript
+- Vite
+  - yarn create vite
+- CNA (Create-Next-App)
+  - npx create-next-app@latest
+
+CRA는 이제 자리에서 물러나고 Vite가 자리를 차지한 것 같다.  
+개발 환경에서의 HMR(Hot Module Reloading), build 속도가 매우 빠르다. 번들이 없는 개발 서버다.
+
+(React Docs BETA에서는 아직 CRA를 추천하고 있는데... Vite로 변경해달라는 pr에 박힌 이모지)
+![github pr](./images/cra-to-vite.png)
+
+Next로 개발을 할 때는 CNA를 사용하여 프로젝트를 구성한다.
+
+간단하게 사용하기에는 괜찮지만, 규모가 있는 서비스를 제작하게 된다면 개발환경을 직접 구축하는 것이 강점을 가진다고 생각한다. 커스텀하는 부분에서 귀찮고 어려움이 많이 생기는 것 같다.
+
+그리고 의존하는 것이 아닌, 내가 코드를 작성 할 개발 환경을 직접 구축해보는 것은 무조건 필요한 일이다. 남이 만들어준 환경에서만 개발을 할 수 있는 사람은 개발자라고 할 수 있을까?
