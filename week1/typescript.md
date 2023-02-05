@@ -13,8 +13,6 @@
 
 타입스크립트 공식문서
 
-- 핸드북 정독하기
-
 간단히 REPL을 쓰고 싶다면 ts-node를 실행
 (TS Playground도 좋다)
 
@@ -229,10 +227,53 @@ person = { name: '홍길동', age: 13, hp: 256, mp: 16 };
 
 ### Generics, Utility Types, and Tips
 
-- 유틸성 타입 공부하기
+유틸리티 타입
 
 ### 편집기 자동 완성 + 개발 환경에서의 오류 검사
 
 - TypeScript를 사용하는 핵심적인 이유
 - 오래된 라이브러리의 경우에 d.ts 파일로 타입 지원, 패키지 이름은 @types/~ 형태
 - DefinitelyTyped
+
+---
+
+핸드북 정독하기  
+The Basics  
+자바스크립트에서 모든 값은 값에 따라서 실행할 수 있는 연산자의 집합이 있다.
+
+```js
+message.toLowerCase();
+
+message();
+```
+
+첫 번째 코드는 `toLowerCase`라는 property에 접근한 후에 그것을 호출하였다.
+두 번째 코드는 `message`를 직접적으로 호출하였다.
+
+그러나 우리가 `message`라는 값을 모른다고 가정하면 (실제로도 꽤 흔하다)  
+우리는 코드를 실행했을 때 어떤 결과값을 얻을 수 있을지 확실하게 말할 수 없다.  
+각 연산자의 행위는 값이 무엇이냐에 달려있다.
+
+- `message`는 호출할 수 있는가?
+- `toLowerCase`라는 프라퍼티를 갖고 있는가?
+- 만약 그렇다면, `toLowerCase`는 호출할 수 있는가?
+- 만약 두 값이 호출할 수 있다면, 무엇을 리턴할 것인가?
+
+이 질문에 대한 답은 일반적으로 자바스크립트 코드를 작성할 때 우리가 머리속으로  
+생각하고 실제로 일치하기를 바란다.
+
+`message`가 아래와 같이 정의되었다고 해보자.
+
+```js
+const message = 'Hello World!';
+```
+
+추측했겠지만, 만약 `message.toLowerCase()`를 실행한다면 우리는 소문자로 변환된 똑같은 문자열을 얻을 수 있다.
+
+Everyday Types
+Narrowing
+More on Functions
+Object Types
+Type Manipulation
+Classes
+Modules
