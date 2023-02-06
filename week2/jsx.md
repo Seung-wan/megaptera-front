@@ -17,6 +17,9 @@
 JSX is an XML-like syntax extension to ECMAScript  
 XML에서 가장 중요한 것은 문법 확장이다.
 
+React는 별도의 파일에 마크업과 로직을 분리하는 대신, 둘 다 포함하는 `컴포넌트`라고  
+부르는 느슨하게 연결된 유닛으로 `관심사`를 분리한다.
+
 리액트를 다룰 때 기본이 되는 기술  
 JSX는 자주 접하게 된다.
 
@@ -37,8 +40,8 @@ React.createElement('p', null, 'Hello, world!');
 
 // @jsx를 코드의 상단에 작성하면 JSX를 JS로 변환할 때 아래와 같이 생성된다.
 // jsx를 리액트 외부에서 사용하고 싶을 때 이런 방식으로 사용할 수 있다.
-/* @jsx r.createElement */
 
+/* @jsx r.createElement */
 <p>Hello, world!</p>;
 
 r.createElement('p', null, 'Hello, world!');
@@ -148,9 +151,15 @@ element.classList = ['test', 'good'].join(' ');
 element.appendChild(document.createElement('p'));
 ```
 
-React Element 트리를 갱신하는데 쓸 수 있다.  
+React Element 트리를 갱신하는데 쓸 수 있다.
+
 React.createElement를 직접 쓰면 힘들기 때문에  
 jsx-runtime에서는 \_jsx, Preact는 h란 함수를 지원한다.
+
+### React Developer Tools
+
+chrome의 extension이다.  
+컴포넌트 구조나 state의 변화를 확인할 수 있고, 리렌더링 되는 컴포넌트도 확인할 수 있다.
 
 ### VDOM (Virtual DOM)
 
@@ -160,11 +169,6 @@ React에서는 바로 DOM을 조작하는 것이 아니라 Virtual DOM Tree를 �
 VDOM과 Real DOM을 비교하면서 바뀐 부분만 변경시켜준다.
 
 VDOM을 쓰면 일을 2번 하는 것이다, 바로 DOM에 반영해주면 될탠데 왜 VDOM을 쓸까?
-
-### React Developer Tools
-
-chrome의 extension이다.  
-컴포넌트 구조나 state의 변화를 확인할 수 있고, 리렌더링 되는 컴포넌트도 확인할 수 있다.
 
 ### VDOM을 쓰는 이유?
 
@@ -177,3 +181,14 @@ chrome의 extension이다.
 JSX를 작성하면 리액트가 그대로 DOM에 반영해준다, 반영하는 행위에 대해서는 신경쓸 필요가 없다.
 
 `VDOM이 무엇이고, 왜 쓰는지 안다면 활용할 수 있는 최적화 기법이 존재한다.`
+
+### 성능 최적화
+
+앱을 배포할 때는 프로덕션 빌드를 사용해서 앱을 최소화해야한다.
+
+기본적으로 리액트는 도움이 되는 경고들을 많이 포함하고 있다.  
+이러한 경고들은 개발에서는 매우 용하지만 리액트를 크고 느리게 만든다.  
+따라서 앱을 배포할때는 프로덕션 버전을 사용해서 배포해야 한다.
+
+만약 프로덕션 버전으로 제대로 배포되었는지 확인하고 싶다면 `React Developer Tools for Chrome`을  
+설치하여 브라우저에서 확인할 수 있다.
