@@ -1,4 +1,4 @@
-## 학습 키워드
+# 학습 키워드
 
 - React에서 JSX를 사용하는 목적
 - Syntactic sugar
