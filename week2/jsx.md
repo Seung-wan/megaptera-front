@@ -132,11 +132,14 @@ React.createElement(
 
 JSX는 React에 있는 createElement를 사용하도록 코드를 바꿔주는 것  
 JSX없이도 React를 사용할 수 있다, JSX로 할 수 있는 모든 것은 순수 JavaScript로도 할 수 있다.
+하지만 JSX로 리액트 어플리케이션을 작성하는 것이 가독성, 생산성 측면에서 모두 좋다고 생각한다.
 
-createElement는 React element를 만들어낸다.  
+createElement는 React Element를 만들어낸다.  
 Browser DOM에서도 element를 만드는 createElement가 있다.
 
 ```js
+// 명령형 방식의 코드
+
 document.createElement('div');
 
 const element = document.createElement('div');
@@ -151,7 +154,7 @@ element.classList = ['test', 'good'].join(' ');
 element.appendChild(document.createElement('p'));
 ```
 
-React Element 트리를 갱신하는데 쓸 수 있다.
+JSX는 React Element 트리를 갱신하는데 쓸 수 있다.
 
 React.createElement를 직접 쓰면 힘들기 때문에  
 jsx-runtime에서는 \_jsx, Preact는 h란 함수를 지원한다.
@@ -176,13 +179,21 @@ VDOM을 쓰면 일을 2번 하는 것이다, 바로 DOM에 반영해주면 될�
 현실: VDOM은 유지보수하기 좋은 어플리케이션을 만들어주고 충분히 빠르다.
 
 `VDOM의 접근 방식이 React의 선언적 API를 가능하게 한다.`  
-명령형으로 DOM을 다루는 것은 개발자 경험이 좋지 않다.  
+명령형으로 DOM을 다루는 것은 반복적인 코드, 가독성, 의도를 드러내는 코드등 다양한 점에서 좋지 않다고 생각한다.
+
 선억적인 프로그래밍은 의도를 더욱 명확하게 드러내고 가독성이 좋은 코드를 작성할 수 있다.  
 JSX를 작성하면 리액트가 그대로 DOM에 반영해준다, 반영하는 행위에 대해서는 신경쓸 필요가 없다.
 
 `VDOM이 무엇이고, 왜 쓰는지 안다면 활용할 수 있는 최적화 기법이 존재한다.`
 
 ### 성능 최적화
+
+리액트에서의 성능 최적화는 방식이 다양하다.  
+제대로된 이해를 바탕으로 상황에 맞는 최적화를 진행해야 한다.  
+`useMemo`, `useCallback` 등의 캐싱 없이도 컴포넌트 구조의  
+분리만으로도 최적화가 가능하다.
+
+### 공식 문서
 
 앱을 배포할 때는 프로덕션 빌드를 사용해서 앱을 최소화해야한다.
 
