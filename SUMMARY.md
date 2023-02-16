@@ -17,3 +17,4 @@
 - [3주차](week3/README.md)
   - [1. React Component](week3/react-component.md)
   - [2. React State](week3/react-state.md)
+  - [3. Thinking in React](week3/thinking-in-react.md)
