@@ -14,7 +14,7 @@
 
 Fetch API를 추상화 시켜놓은 것이 axios다.
 
-Fetch를 그대로 사용하면 Promise라서 값을 바로 받아올 수 없다.
+Fetch는 서버와 통신을 하는 것이기 때문에 그대로 사용하면 Promise 객체가 pending인 상태라서 값을 바로 받아올 수 없다.
 then 메소드 혹은 async/await 문법을 사용하여 비동기 처리가 끝난 후의 값을 받아와야 한다.
 
 ```ts
