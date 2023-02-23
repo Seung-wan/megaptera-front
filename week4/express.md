@@ -72,17 +72,26 @@ npm i -D @types/express
 ```
 
 localhost:3000을 주소창에 입력했을 때 완전한 형태는 <http://localhost:3000/> 이다.
-localhost는 127.0.0.1이다. 자기 자신을 가리키는 주소.
+localhost는 127.0.0.1이다. 자기 자신을 가리키는 주소, 루프백 주소라고도 불린다.
 
 ### Hello World 예제
 
 app.ts 파일 작성
 
+res.send와 res.json의 차이점
+
+res.send는 argument를 판단하여 Content-Type을 잡아준다. argument가 object이면 내부에서는 res.json을 호출한다.  
+res.json은 Content-Type이 json이 아닐 경우 application/json으로 세팅하고 res.send를 호출한다.  
+Content-Type이 다른점이라 생각되고 json 형식을 반환해주는 경우를 명시적으로 표현할때는 res.json도 좋은 것 같으나, argument를  
+보고서 충분히 판단할 수 있으므로 큰 의미는 없는 것 같다.
+
 ```ts
 // app.ts
 
+// TypeScript이기 때문에 ESModule(import, export)을 사용한다.
 import express from 'express';
 
+// 서버의 포트 번호는 환경변수로 많이 관리하는 것 같다.
 const port = 3000;
 
 const app = express();
@@ -125,6 +134,7 @@ CRUD에 대해 HTTP Method를 대입한다. Read는 Collection(복수)과 Item(E
 4. Update (Item) -> PUT 또는 PATCH /products/{id} => 특정 상품 정보 변경 (JSON 정보 함께 전달)
 5. Delete (Item) -> DELETE /products/{id} => 특정 상품 삭제
 
+- GET은 request body에 값을 넣어줄 수 없다.
 - PUT이 먼저 나왔기 때문에 기존에는 PUT을 많이 사용했지만 이제 PATCH도 많이 사용한다.
 - PUT은 overwrite, 덮어쓰는 느낌. 없으면 추가하고, 있으면 덮어쓴다.
 - PATCH는 일부만 수정하는 업데이트를 하는 느낌.
@@ -177,3 +187,47 @@ app.get('/products', (req, res) => {
   res.send({ products });
 });
 ```
+
+---
+
+### BFF란?
+
+[카카오페이지에서 BFF 적용기](https://fe-developers.kakaoent.com/2022/220310-kakaopage-bff/)  
+카카오페이지에서 겪었던 문제
+
+- 여러 플랫폼(Web, Android, iOS, ...)을 지원하게 되면서 각각 특정 데이터가 필요한 상황
+- 원하는 데이터 형태에 도달하기 위해 여러 API 호출의 응답을 조작, 혼합, 일치시키는 상황
+- 이런 상황들이 겹쳐 프론트엔드에서 복잡한 계산이나 비즈니스 로직을 작성하는 상황
+
+프론트엔드에서 복잡한 계산을 수행하는 경우 렌더링이 느려질 수 있다. UI 스레드에서 렌더링과 비즈니스 로직 수행이 경합을 벌이기 때문이다.  
+렌더링은 유저 경험과 매우 밀접한 관련이 있다.  
+이를 개선하기 위해서는 어떠한 방법이 있을까?
+
+다양한 플랫폼을 지원해야 하는 API는 클라이언트마다 사용하지 않는 불필요한 데이터가 포함될 수 있다.  
+추가로 직접 API에 의존하는 경우에 아래와 같은 이슈가 발생할 수 있다.
+
+- MSA 환경에서 API 엔드포인트가 분리될 때 팔로업 이슈
+- CORS
+- API 입장에서 여러 플랫폼과 스펙을 맞춰야 하는 비용
+- 플랫폼별로 다른 인증 방식을 통합하려는 무리한 시도
+- '화면에 필요한 데이터만 받는' partial response를 하기 어려운 이슈
+
+이와 같은 문제들을 해결하기 위해 BFF가 등장했다. 말 그대로 프론트엔드를 위한 중간 서버를 구현하는 것  
+하나의 프론트엔드에 대해 하나의 BFF를 두어서 프론트엔드 요구사항에 맞게 구현할 수 있다.  
+여러 플랫폼을 지원하지 않을 경우에는 BFF가 의미 없을 수 있다.
+
+카카오 페이지에서는 iOS, Android, Web을 지원하지만, Web에서만 BFF를 적용하고 있다.  
+BFF에서는 생산성을 높이기 위해 데이터를 통합하는 처리를 담당한다.  
+BFF를 사용함으로써 앞에서 말한 API 의존성 이슈를 처리해줄 수 있다.
+
+카카오 페이지에서는 클라이언트에서 받아야하는 데이터의 형식이 여러가지인 경우가 많아서 BFF를 도입하게 되었다.
+카카오 페이지의 BFF 구조는 NextJS, apollo server, urql, redux를 사용하고 있다.
+
+### ts-node란?
+
+JavaScript를 웹 브라우저가 아닌곳에서 실행하기 위해서는 JavaScript Runtime인 Node.js를 사용한다.  
+TypeScript를 실행하기 위해서는 먼저 JavaScript 컴파일하는 과정이 필요한데 이를 생략하고  
+TypeScript로 작성된 파일을 실행할 수 있게 해준다.
+
+- ts-node는 Node.js를 위한 TypeScript 실행 엔진, REPL이다.
+- JIT 컴파일러를 이용하여 TypeScript를 JavaScript로 변환해주고, 프리컴파일없이 타입스크립트를 Node.js에서 실행할 수 있게 해준다.
