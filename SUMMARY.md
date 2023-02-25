@@ -4,7 +4,7 @@
 
 - [1주차](week1/README.md)
 
-  - [1. 개발환경](week1/environment.md)
+  - [1. Environment](week1/environment.md)
   - [2. TypeScript](week1/typescript.md)
   - [3. React](week1/react.md)
   - [4. Testing Library](week1/testing-library.md)
@@ -23,6 +23,6 @@
 - [4주차](week4/README.md)
   - [1. Express](week4/express.md)
   - [2. Fetch API & CORS](week4/fetch-cors.md)
-  - [3. React의 Hook](week4/react-hooks.md)
+  - [3. React Hooks](week4/react-hooks.md)
   - [4. useRef & Custom Hook](week4/useRef-custom-hook.md)
   - [5. usehooks-ts](week4/usehooks-ts.md)
