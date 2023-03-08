@@ -84,3 +84,75 @@ View의 복잡한 관계(전통적인 MVC에선 이런 상황을 지양한다)�
 2. Dispatcher -> (여러) Store로 Action을 전달. 메시지 브로커와 유사하다.
 3. Store (여러 개) -> 받은 Action에 따라 상태를 변경. 상태 변경을 알림.
 4. View -> Store의 상태를 반영.
+
+Redux는 단일 Store를 사용함으로써 좀 더 단순한 그림을 제안한다.
+
+1. Action
+2. Store -> dispatch를 통해 Action을 받고, 사용자가 정의한 reducer를 통해 State를 변경한다.
+3. View -> State를 반영.
+
+불변성을 지켜서 업데이트한다.
+
+```js
+const state = {
+  name: 'tester',
+};
+
+const nextState = { ...state, name: 'New Name' };
+```
+
+reducer를 통해서 상태를 변경해준다.  
+reducer는 리액트와는 상관이 없는 것이다.
+
+Action을 어떻게 표현하느냐가 Redux를 사용함에 있어 큰 차이를 만든다.  
+Action Creator도 존재하는데, Action을 만들어내는 Helper 함수의 역할을 한다.
+
+하지만 상태를 UI에 반영하는 방법은 모두 동일하다.
+
+3단계 프로세스
+
+- Input -> Action + Dispatch
+- Process -> reducer
+- Output -> View(React)
+
+### External Store
+
+리액트가 아닌 것, 리액트의 바깥인 것.  
+일반적인 아키텍처 관점에서 봤을 때 UI가 오히려 가장 바깥쪽, 외부와 가깝다.  
+React는 사실 바깥쪽에 있는 것.
+
+여기서 External Store의 의미는 안, 밖의 의미라기 보다는 React 내부에 있지 않다는 것. (React의 입장에서)
+
+상태가 바뀌면 화면을 그려줘야하는데, useState 훅을 사용하지 않으면 상태의 변화가 UI에 반영되지 않는다.
+
+따라서 useState를 사용하지 않는 값이 변화하였을 때 UI에 반영해주려면 forceUpdate를 시켜줘야 한다.  
+class component에서는 존재했지만, function component에서는 직접 만들어서 쓰면 된다.  
+useState보다 useReducer를 사용하는 것이 더 가볍다는 의견이 있다.  
+[react-use PR](https://github.com/streamich/react-use/pull/837)
+
+React는 재조정 (Reconciliation) 과정을 통해 상태가 바뀌면 해당 컴포넌트와 하위 컴포넌트를 다시 렌더링한다.
+
+```ts
+const [, setState] = useState({});
+const forceUpdate = () => setState({});
+
+// Custom Hook
+function useForceUpdate() {
+  const [, setState] = useState({});
+  return useCallback(() => setState({}), []);
+}
+```
+
+useState로 상태를 관리하지 않고, 일반적인 변수로 관리하면서 forceUpdate를 시켜주는 것이 기본적인 External Store의 아이디어다.  
+forceUpdate를 시켜줄 때의 주의해야 할 점은 state에 변화가 있어야, 리액트에서 리렌더링이 발생한다는 것이다.
+
+Business Logic과 UI를 분리할 수 있다.
+
+React에서 Business Logic을 분리하게 되면, React는 Business Logic이 어떻게 구성되어 있는지 알 필요 없이 가져다 쓰기만 하면 되고,  
+UI와 분리가 되었기 때문에 Business Logic은 테스트를 하기가 쉬워진다.
+
+관심사의 분리: 내가 알빠가 뭐야 라는 식  
+각 레이어별로 레이어가 맡아야 하는 역할만 하면 된다.
+
+Business Logic은 쉽게 바뀌지 않는다.  
+UI는 자주 바뀌는데 UI에 Business Logic이 포함되어 있으면 테스트 코드가 쉽게 터진다.
