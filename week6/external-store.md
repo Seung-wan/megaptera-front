@@ -77,7 +77,7 @@ Output
 ### Flux Architecture
 
 리액트를 발표하고 다음 해에 발표를 했다.  
-MVC의 대안으로 내세운 아키텍처다.  
+MVC의 대안으로 내세운 아키텍처다. (엄밀히 말하면 영상에서 처럼 MVC를 사용하지는 않는다)  
 View의 복잡한 관계(전통적인 MVC에선 이런 상황을 지양한다)를 겨냥해 명확히 `unidirectional data flow`를 강조한다.
 
 1. Action -> 이벤트/메시지 같은 객체.
@@ -130,7 +130,8 @@ class component에서는 존재했지만, function component에서는 직접 만
 useState보다 useReducer를 사용하는 것이 더 가볍다는 의견이 있다.  
 [react-use PR](https://github.com/streamich/react-use/pull/837)
 
-React는 재조정 (Reconciliation) 과정을 통해 상태가 바뀌면 해당 컴포넌트와 하위 컴포넌트를 다시 렌더링한다.
+React는 재조정 (Reconciliation) 과정을 통해 상태가 바뀌면 해당 컴포넌트와 하위 컴포넌트를 다시 렌더링한다.  
+setState가 내부적으로 useReducer를 사용한다.
 
 ```ts
 const [, setState] = useState({});
