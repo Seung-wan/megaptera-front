@@ -36,7 +36,14 @@
   - [4. Playwright](week5/playwright.md)
 
 - [6주차](week6/README.md)
+
   - [1. External Store](week6/external-store.md)
   - [2. TSyringe](week6/TSyringe.md)
   - [3. Follow Redux](week6/follow-redux.md)
   - [4. usestore-ts](week6/usestore-ts.md)
+
+- [7주차](week7/README.md)
+  - [1. Routing](week7/routing.md)
+  - [2. Routes](week7/routes.md)
+  - [3. Router](week7/router.md)
+  - [4. Navigation](week7/navigation.md)
