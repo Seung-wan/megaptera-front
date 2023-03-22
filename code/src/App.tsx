@@ -1,47 +1,18 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+import styled from "styled-components";
 
-import FilterableProductTable from './components/FilterableProductTable';
-import Product from './types/Product';
+const Paragraph = styled.p`
+  color: red;
 
-const products: Product[] = [
-  {
-    category: 'Fruits',
-    price: '$1',
-    stocked: true,
-    name: 'Apple',
-  },
-  {
-    category: 'Fruits',
-    price: '$1',
-    stocked: true,
-    name: 'Dragonfruit',
-  },
-  {
-    category: 'Fruits',
-    price: '$2',
-    stocked: false,
-    name: 'Passionfruit',
-  },
-  {
-    category: 'Vegetables',
-    price: '$2',
-    stocked: true,
-    name: 'Spinach',
-  },
-  {
-    category: 'Vegetables',
-    price: '$4',
-    stocked: false,
-    name: 'Pumpkin',
-  },
-  {
-    category: 'Vegetables',
-    price: '$1',
-    stocked: true,
-    name: 'Peas',
-  },
-];
+  strong {
+    color: blue;
+  }
+`;
 
 export default function App() {
-  return <FilterableProductTable products={products} />;
+  return (
+    <Paragraph>
+      Hello, world
+      <strong>!</strong>
+    </Paragraph>
+  );
 }
