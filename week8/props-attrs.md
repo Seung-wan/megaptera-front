@@ -52,3 +52,28 @@ useBoolean 훅을 사용하여 간단하게 on/off 하는 용도의 state를 만
 
 먼저 속성을 정의하고 값을 분기처리할 수도 있고, 아예 속성까지 props에 따라 처리할 수도 있다. 이때 자동완성을 위해 css 함수를 사용해주면 편리하다.
 
+### 속성 추가
+
+attrs를 활용하여 기본 속성을 추가할 수 있다.  
+props를 받을 때 구조분해할당을 활용해도 되는데 가독성이 안좋은 것 같기도 해서 취향의 역역인 것 같다.
+
+```tsx
+import styled from 'styled-components';
+
+type ButtonProps = {
+  type?: 'button' | 'submit' | 'reset';
+  active?: boolean;
+}
+
+const Button = styled.button.attrs<ButtonProps>((props) => ({
+	type: props.type ?? 'button'
+}))<ButtonProps>`
+	border: 1px solid #888;
+	background: transparent;
+	cursor: pointer;
+`;
+
+export default Button;
+```
+
+
