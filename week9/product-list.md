@@ -175,3 +175,106 @@ export default class ProductsStore {
   }
 }
 ```
+
+### 카테고리 목록
+
+헤더에 카테고리 목록을 보여줄 것
+
+```tsx
+// Header.tsx
+
+export default function Header() {
+  const { categories } = useFetchCategories();
+
+  return (
+    <Container>
+      <h1>Shop</h1>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/products">Products</Link>
+            {!!categories.length && (
+              <ul>
+                {categories.map((category) => (
+                  <li key={category.id}>
+                    <Link to={`/products?categoryId=${category.id}`}>
+                      {category.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+          <li>
+            <Link to="/cart">Cart</Link>
+          </li>
+        </ul>
+      </nav>
+    </Container>
+  );
+}
+```
+
+NavLink 보다는 현재 위치를 찾아서 스타일링 해주는 방식이 더 낫다. querystring의 경우에 NavLink로 확인하기 어려운 것 같다.
+
+```ts
+
+```
+
+```ts
+// stores/CategoriesStore.ts
+
+import axios from 'axios';
+
+import { singleton } from 'tsyringe';
+
+import { Store, Action } from 'usestore-ts';
+
+import { Category } from '../types';
+
+@singleton()
+@Store()
+export default class CategoriesStore {
+  categories: Category[] = [];
+
+  async fetchCategories() {
+    this.setCategories([]);
+
+    const categories = await apiService.fetchCategories();
+
+    this.setCategories(categories);
+  }
+
+  @Action()
+  setCategories(categories: Category[]) {
+    this.categories = categories;
+  }
+}
+```
+
+```ts
+// hooks/useFetchCategories.ts
+
+import { container } from 'tsyringe';
+
+import { useEffectOnce } from 'usehooks-ts';
+
+import { useStore } from 'usestore-ts';
+
+import CategoriesStore from '../stores/CategoriesStore';
+
+export default function useFetchCategories() {
+  const store = container.resolve(CategoriesStore);
+
+  const [{ categories }] = useStore(store);
+
+  useEffectOnce(() => {
+    store.fetchCategories();
+  });
+
+  return { categories };
+}
+```
