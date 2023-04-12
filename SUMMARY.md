@@ -60,8 +60,15 @@
   - [6. Global Style & Theme](week8/globalStyle-Theme.md)
 
 - [9주차](week9/README.md)
+
   - [1. 개발하기 전 준비](week9/setup.md)
   - [2. 목록 보기](week9/product-list.md)
   - [3. 상품 상세 보기](week9/product-detail.md)
   - [4. 장바구니 보기](week9/cart.md)
   - [5. 장바구니에 상품 담기](week9/add-item-to-cart.md)
+
+- [10주차](week10/README.md)
+  - [1. 로그인](week10/login.md)
+  - [2. 로그아웃](week10/logout.md)
+  - [3. 회원가입](week10/signup.md)
+  - [4. 주문 목록 & 주문 상세](week10/order.md)
