@@ -18,3 +18,14 @@ jwt, session, OAuth 2.0 등의 방식에 대해 각각 정확하게 정리하기
 LoginPage에서는 AccessToken이 들어오면, 로그인에 성공하게 되면 /으로 redirection한다.
 
 useAccessToken 훅과 useLoginFormStore 훅이 핵심이다.
+
+원래는 Login Form은 validation 처리를 디테일하게 해주면 좋다.  
+기본적으로 이메일은 정규표현식으로 검증한다.
+
+로그인 페이지에서 이메일을 입력했다가, 다른 페이지로 갔다가 다시 로그인 페이지로 넘어왔을 때 기존에 입력했던 값이 남아있으면 안되기 때문에  
+useEffect에서 컴포넌트가 마운트되었을때 store를 초기화해준다.
+
+로그인에 성공해서 다른 페이지로 redirect 시켜줄 때도 store를 초기화해준다.  
+만약 store를 초기화해주지 않고 다시 로그인 페이지에 들어오게 되면 리액트 컴포넌트의 실행 순서에 따라서 로그인 했을때의 데이터가 잠깐 남아있을 것 같다.
+
+JWT를 store와 localStorage에 함께 관리한다.
