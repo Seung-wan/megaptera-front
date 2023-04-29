@@ -15,3 +15,6 @@ Layout 컴포넌트에서는 useCheckAccessToken 훅을 이용하여 AccessToken
 
 사용자 관리는 디테일하게 들어갈수록 정말 복잡하다.  
 swr를 활용하여 유저 정보를 불러올 것, swr을 그대로 사용하지 않고 래핑해서 사용한다.
+
+swr을 직접적으로 사용하는 useFetch 훅, useFetch 훅을 기반으로 각 모델 데이터를 불러오는 훅을 만든다. useFetchUsers  
+래핑을 하게되면 추상화를 통해 api url, fetcher function등을 감추고, 모델 데이터의 타입과 endpoint만 넣어주면 데이터를 불러올 수 있다.
